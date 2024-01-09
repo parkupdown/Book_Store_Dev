@@ -8,7 +8,7 @@ dotenv.config();
 
 const join = (req, res) => {
   const { email, password } = req.body;
-
+  console.log(req.params);
   // 비밀번호 암호화
   const salt = crypto.randomBytes(10).toString("base64");
   // randomBytes => 매개변수로들어오는 숫자를 가지고 랜덤바이트를 만들어줌 (64만큼의 길이를)
