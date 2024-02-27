@@ -2,15 +2,19 @@ import styled from "styled-components";
 import logo from "../../assets/images/logo.png";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useCategory } from "../../hooks/useCategory";
+/*
 const CATEGORY = [
   { id: null, name: "전체" },
   { id: 0, name: "동화" },
   { id: 1, name: "소설" },
   { id: 2, name: "사회" },
 ];
+*/
 
 export default function Header() {
+  const { category } = useCategory();
+
   return (
     <HeaderStyled>
       <h1 className="logo">
@@ -20,7 +24,7 @@ export default function Header() {
       </h1>
       <nav className="category">
         <ul>
-          {CATEGORY.map((item) => (
+          {category.map((item) => (
             <li key={item.id}>
               <Link
                 to={
@@ -42,7 +46,7 @@ export default function Header() {
             </Link>
           </li>
           <li>
-            <Link to="/login">
+            <Link to="/signup">
               <FaRegUser />
               회원가입
             </Link>
