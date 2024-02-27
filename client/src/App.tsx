@@ -4,6 +4,7 @@ import ThemeSwitcher from "./components/header/ThemeSwitcher";
 import { BookStoreThemeProvider } from "./context/themeContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error from "./components/common/Error";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,14 @@ const router = createBrowserRouter([
     element: (
       <LayOut>
         <div>도서목록</div>
+      </LayOut>
+    ),
+  },
+  {
+    path: "signup",
+    element: (
+      <LayOut>
+        <Signup />
       </LayOut>
     ),
   },

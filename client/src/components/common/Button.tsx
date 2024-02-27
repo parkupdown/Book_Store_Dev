@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { ButtonSchema, ButtonSize } from "../../style/theme";
 
-interface Props {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size: ButtonSize;
   schema: ButtonSchema;
@@ -27,11 +27,12 @@ export default function Button({
     </ButtonStyle>
   );
 }
+//react - hook - form
 
 const ButtonStyle = styled.button<Omit<Props, "children">>`
   font-size: ${({ theme, size }) => theme.button[size].fontSize};
   padding: ${({ theme, size }) => theme.button[size].padding};
-  color: ${({ theme, schema }) => theme.buttonSchema[schema].fontSize};
+  color: ${({ theme, schema }) => theme.buttonSchema[schema].color};
   background-color: ${({ theme, schema }) =>
     theme.buttonSchema[schema].backgroundColor};
   border: 0;
