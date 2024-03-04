@@ -12,12 +12,12 @@ const addLike = (req, res) => {
 
   conn.query(sql, value, (err, result) => {
     if (err) {
-      console.log(err);
       return res.status(StatusCodes.BAD_REQUEST).end();
     }
     return res.status(StatusCodes.OK).json(result);
   });
 };
+// 원래는 토큰을 header의 Authorization으로 들어옴
 
 const removeLike = (req, res) => {
   const { id } = req.params;

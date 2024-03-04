@@ -56,7 +56,7 @@ const login = (req, res) => {
 
     if (loginUser && loginUser.password === hashPassword) {
       // 토큰 발행
-      console.log(result, hashPassword);
+
       const token = jwt.sign(
         {
           email: loginUser.email,
