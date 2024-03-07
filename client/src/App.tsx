@@ -7,6 +7,8 @@ import Error from "./components/common/Error";
 import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/Login";
+import BookDetail from "./pages/BookDetail";
+import Books from "./pages/Books";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +28,15 @@ const router = createBrowserRouter([
     path: "/books",
     element: (
       <LayOut>
-        <div>도서목록</div>
+        <Books />
+      </LayOut>
+    ),
+  },
+  {
+    path: "/books/:bookId",
+    element: (
+      <LayOut>
+        <BookDetail />
       </LayOut>
     ),
   },

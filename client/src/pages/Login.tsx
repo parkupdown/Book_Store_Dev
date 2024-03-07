@@ -1,11 +1,8 @@
-import styled from "styled-components";
 import Title from "../components/common/Title";
 import Button from "../components/common/Button";
 import { InputText } from "../components/common/InputText";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Sign } from "crypto";
 import { login, signup } from "../api/auth.api";
 import { useAlert } from "../hooks/useAlert";
 import { SignupStyle } from "./Signup";
@@ -35,7 +32,6 @@ export default function Login() {
     formState: { errors },
   } = useForm<SignupProps>();
   // useForm은 내부적으로 사용하는 매개변수에 대한 타입을 먼저 지정받는다.
-
   const onSubmit = (data: SignupProps) => {
     login(data).then(
       (res) => {

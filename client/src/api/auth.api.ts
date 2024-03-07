@@ -18,7 +18,7 @@ export const resetPassword = async (data: SignupProps) => {
 
 interface LoginResponse {
   token: string;
-}
+} // Header로 전달될 Token
 
 export const login = async (data: SignupProps) => {
   const response = await httpClient.post<LoginResponse>("/users/login", data);

@@ -11,7 +11,7 @@ export const createClient = (config?: AxiosRequestConfig) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: getToken() ? getToken() : "",
-    },
+    }, // 어차피 JWT는 만료되면? 그 토큰은 쓸 수 없게되니까
     withCredentials: true,
     ...config,
   });

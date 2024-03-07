@@ -15,7 +15,7 @@ export interface SignupProps {
   password: string;
 }
 
-export default function Signup() {
+export default function ResetPassword() {
   const navigate = useNavigate();
   const showAlert = useAlert();
   const [resetRequested, setResetRequested] = useState(false);
