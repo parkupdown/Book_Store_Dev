@@ -8,7 +8,7 @@ dotenv.config();
 
 const join = (req, res) => {
   const { email, password } = req.body;
-  console.log(req.params);
+
   // 비밀번호 암호화
   const salt = crypto.randomBytes(10).toString("base64");
   // randomBytes => 매개변수로들어오는 숫자를 가지고 랜덤바이트를 만들어줌 (64만큼의 길이를)
@@ -31,7 +31,6 @@ const join = (req, res) => {
   let values = [email, hashPassword, salt];
   // password = > hashPassword
   conn.query(sql, values, (err, result) => {
-    console.log(err);
     if (err) {
       return res.status(StatusCodes.BAD_REQUEST).end();
     }
@@ -45,25 +44,25 @@ const login = (req, res) => {
   let sql = "SELECT * FROM users WHERE email = ?";
   conn.query(sql, email, (err, result) => {
     if (err) {
-      console.log(err);
       return res.status(StatusCodes.BAD_REQUEST).end;
     }
     const loginUser = result[0];
     // 한명만 가져올거니까 0번인덱스
+
     const hashPassword = crypto
       .pbkdf2Sync(password, loginUser.salt, 10000, 10, "sha512")
       .toString("base64");
 
     if (loginUser && loginUser.password === hashPassword) {
       // 토큰 발행
-
       const token = jwt.sign(
         {
+          id: loginUser.id,
           email: loginUser.email,
         },
         process.env.SECRET,
         {
-          expiresIn: "5m",
+          expiresIn: "20m",
           issuer: "updownpark",
         }
       );
@@ -71,7 +70,9 @@ const login = (req, res) => {
         httpOnly: true,
       });
 
-      return res.status(StatusCodes.OK).json(result);
+      return res
+        .status(StatusCodes.OK)
+        .json({ ...result[0], token, token: token });
     } else {
       //만약 계정정보 일치하지 않는다면?
       return res.status(StatusCodes.UNAUTHORIZED).end();

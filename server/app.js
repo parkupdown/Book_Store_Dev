@@ -6,11 +6,12 @@ const categoryRouter = require("./routes/category.js");
 const cartRouter = require("./routes/carts.js");
 const likeRouter = require("./routes/likes.js");
 const orderRouter = require("./routes/orders.js");
+const cors = require("cors");
 
 const app = express();
 dotenv.config();
 app.listen(process.env.PORT, () => console.log("연결완료"));
-
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 
 app.use("/users", userRouter);
