@@ -25,6 +25,7 @@ export default function Books() {
     </>
   );
 }
+
 const BookStyle = styled.div`
   display: flex;
   flex-direction: column;

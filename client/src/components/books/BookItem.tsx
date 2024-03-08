@@ -3,10 +3,18 @@ import { Book } from "../../models/book.model";
 import { getImgSrc } from "../../utils/image";
 import { formatNumber } from "../../utils/format";
 import { FaHeart } from "react-icons/fa";
+import { ViewMode } from "./BooksViewSwitcher";
+import { BooksListStyleProps } from "./BooksList";
 
-export default function BooksItem({ book }: { book: Book }) {
+export default function BooksItem({
+  book,
+  view,
+}: {
+  book: Book;
+  view: ViewMode;
+}) {
   return (
-    <BooksItemStyle>
+    <BooksItemStyle view={view}>
       <div className="img">
         <img src={getImgSrc(book.img)} alt={book.title} />
       </div>
@@ -24,14 +32,15 @@ export default function BooksItem({ book }: { book: Book }) {
   );
 }
 
-const BooksItemStyle = styled.div`
+const BooksItemStyle = styled.div<BooksListStyleProps>`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ view }) => (view === "grid" ? "column" : "row")};
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 
   .img {
     border-radius: ${({ theme }) => theme.borderRadius.default};
     overflow: hidden;
+    width: ${({ view }) => (view === "grid" ? "auto" : "160px")};
     img {
       max-width: 100%;
     }
@@ -40,6 +49,7 @@ const BooksItemStyle = styled.div`
   .content {
     padding: 16px;
     position: relative;
+    flex: ${({ view }) => (view === "grid" ? 0 : 1)};
     h2 {
       font-size: 1.25rem;
       font-weight: 700;

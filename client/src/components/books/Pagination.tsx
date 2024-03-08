@@ -23,7 +23,7 @@ export default function Pagenation({ pagination }: Props) {
 
     setSearchParams(newSearchParams);
   };
-  console.log(currentPage, pages);
+
   return (
     <PaginationStyle>
       {pages > 0 && (
