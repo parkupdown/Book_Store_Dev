@@ -1,5 +1,6 @@
 const conn = require("../mariadb"); // db 모듈
 const { StatusCodes } = require("http-status-codes"); //http 상태코드 모듈
+const { decodeJwt } = require("./LikeController");
 
 const allBooks = (req, res) => {
   let allBooksRes = {};
@@ -90,8 +91,11 @@ const allBooks = (req, res) => {
  */
 
 const bookDetail = (req, res) => {
-  let { user_id } = req.params;
+  const decodedJwt = decodeJwt(req, res);
+  let user_id = decodedJwt.id;
   let book_id = req.params.id;
+
+  console.log("---------" + user_id);
 
   user_id = parseInt(user_id);
   book_id = parseInt(book_id);
